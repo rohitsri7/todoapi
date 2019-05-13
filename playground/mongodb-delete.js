@@ -10,9 +10,18 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp' ,(err, db)=>{
   }
   console.log("connected to mongodb server");
 
-  db.collection('Todos').deleteMany({text: "eat"}).then(result)=>{
-    console.log(result);
-  });
+  // db.collection('Todos').deleteMany({text: 'walk the dog'}).then((result)=>{
+  //   console.log(result);
+  // });
 
-  db.close();
+// db.collection('Todos').deleteOne({text: 'say'}).then((result)=>{
+//   console.log(result);
+// });
+
+db.collection('users').findOneAndDelete({
+  _id: new ObjectID('5cd947e99885b1332c39c5ff')
+}).then((result)=>{
+  console.log(result);
+});
+
 });
