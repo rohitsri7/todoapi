@@ -10,34 +10,27 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp' ,(err, db)=>{
   }
   console.log("connected to mongodb server");
 
-  db.collection('Todos').find({
-    _id: new ObjectID('5cd922248ea7972a58b9235e')
-    }).toArray().then((docs)=>{
-      console.log(JSON.stringify(docs,undefined,2));
-  },(err)=>{
-    console.log("unable to fetch data");
+
+  db.collection('Todos').insertOne({
+    text: 'seodsad',
+    completed: false
+  },(err, result)=>{
+    if(err){
+      return console.log("unable to do insert");
+    }
+    console.log(JSON.stringify(result.ops,undefined,2));
   });
 
-  // db.collection('Todos').insertOne({
-  //   text: 'seodsad',
-  //   completed: false
-  // },(err, result)=>{
-  //   if(err){
-  //     return console.log("unable to do insert");
-  //   }
-  //   console.log(JSON.stringify(result.ops,undefined,2));
-  // });
+db.collection('users').insertOne({
+  name: 'rohit',
+  age: '22',
+  location: 'dhn'
+}, (err,result)=>{
+  if(err){
+    return console.log("unable to insert");
+  }
+  console.log(JSON.stringify(result.ops,undefined,2));
+});
 
-// db.collection('users').insertOne({
-//   name: 'rohit',
-//   age: '22',
-//   location: 'dhn'
-// }, (err,result)=>{
-//   if(err){
-//     return console.log("unable to insert");
-//   }
-//   console.log(JSON.stringify(result.ops,undefined,2));
-// });
-
-  //db.close();
+  db.close();
 });
